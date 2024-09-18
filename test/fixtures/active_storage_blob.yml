@@ -1,0 +1,7 @@
+profile_picture_blob:
+  key: profile_picture_blob_key
+  filename: profile.png
+  content_type: image/png
+  metadata: {}
+  byte_size: <%= File.size(Rails.root.join('test/fixtures/files/profile.png')) %>
+  checksum: <%= Digest::MD5.file(Rails.root.join('test/fixtures/files/profile.png')).base64digest %>
