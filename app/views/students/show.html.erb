@@ -1,16 +1,15 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @student %>
-
-
 <p>
   <strong>Profile Picture:</strong>
   <% if @student.profile_picture.attached? %>
-    <%= image_tag @student.profile_picture %>
+    <%= image_tag @student.display_image %>
   <% else %>
-    <%= image_tag 'default_profile.png' %> 
+    <%= image_tag 'default_profile.png', size: "300x300" %> 
   <% end %>
 </p>
+
+<%= render @student %>
 
 <div>
   <%= link_to "Edit this student", edit_student_path(@student) %> |
