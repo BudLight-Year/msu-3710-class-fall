@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: Peter
+  last_name: Parker
+  school_email: pparker@msudenver.edu
+  major: Science
+  minor: 
+  graduation_date: 2024-12-16
+
+two:
+  first_name: Mary
+  last_name: Jane
+  school_email: mj@msudenver.edu
+  major: Journalism
+  minor: 
+  graduation_date: 2025-04-16

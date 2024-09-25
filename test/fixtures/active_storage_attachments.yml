@@ -1,0 +1,5 @@
+profile_picture_attachment:
+  name: profile_picture
+  record_type: Student
+  record_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  blob_id: <%= ActiveRecord::FixtureSet.identify(:profile_picture_blob) %>
