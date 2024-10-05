@@ -36,3 +36,7 @@
 
 #ignore environment variable file
 .env
+
+
+# ignore node modules because, they are having problems with commits
+node_modules/
