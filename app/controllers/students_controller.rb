@@ -1,9 +1,32 @@
+require 'date'
+
+
 class StudentsController < ApplicationController
   before_action :set_student, only: %i[ show edit update destroy ]
-
   # GET /students or /students.json
   def index
+    @search_params = params[:search] || {}
     @students = Student.all
+  
+    if @search_params[:major].present?
+      @students = @students.where(major: @search_params[:major])
+    end
+    puts "Before date if block"
+    if @search_params[:date].present? && @search_params[:date_before_after].present?
+      date_str = @search_params[:date]
+      date = Date.parse(date_str)
+            date_before_after = @search_params[:date_before_after]
+      puts "Inside date search if block"
+      @students = case date_before_after
+                  when "before"
+                    @students = @students.where("graduation_date <= ?", date)
+                  when "after"
+                    @students = @students.where("graduation_date >= ?", date)
+                  else
+                    @students
+                  end
+    end
+  
   end
 
   # GET /students/1 or /students/1.json

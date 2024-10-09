@@ -1,0 +1,25 @@
+<%= form_with(url: students_path, method: :get, local: true, class: "form-inline") do |form| %>
+    <div>
+      <%= form.label :major, "Select Major", class: "form-label" %>
+      <%= form.select :major, options_for_select(Student::VALID_MAJORS), {prompt: "Any Major"}, name: 'search[major]', class: "form-control" %>
+    </div>
+
+    <div>
+        <%= form.label :date, "Select Date", class: "form-label" %>
+        <%= form.date_field :date, name: "search[date]" %>
+    </div>
+
+    <div>
+        <%= form.label :date_before_after, "Search before or after date?", class: "form-label" %>
+        <%= form.radio_button :date_before_after, "before", checked: @search_params[:date_before_after] == "before", name: 'search[date_before_after]' %>
+        <%= form.label :date_before_after_before, "Before" %>
+
+        <%= form.radio_button :date_before_after, "after", checked: @search_params[:date_before_after] == "after", name: 'search[date_before_after]' %>
+        <%= form.label :date_before_after_after, "After" %>
+    </div>
+  
+    <div>
+      <%= form.submit "Search", class: "btn btn-primary" %>
+    </div>
+<% end %>
+  
