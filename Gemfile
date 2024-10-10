@@ -52,6 +52,9 @@ group :development, :test do
 
   # rspec for tests
   gem 'rspec-rails', '~> 6.0'
+
+  # faker for auto adding students
+  gem 'faker'
 end
 
 group :development do

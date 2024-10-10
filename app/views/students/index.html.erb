@@ -3,12 +3,22 @@
 <%= render 'search_form', search_params: @search_params %>
 <div id="students">
   <% @students.each do |student| %>
-    <%= render student %>
     <p>
+      <strong>First Name:</strong>
+      <%= student.first_name %><br>
+
+      <strong>Last Name:</strong>
+      <%= student.last_name %><br>
+
+      <strong>Major:</strong>
+      <%= student.major %><br>
+
+      <strong>Graduation Date:</strong>
+      <%= student.graduation_date %><br>
+
       <%= link_to "Show this student", student %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New student", new_student_path %>
-
+<%= link_to "New student", 

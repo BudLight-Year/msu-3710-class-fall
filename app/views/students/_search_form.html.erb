@@ -17,6 +17,11 @@
         <%= form.radio_button :date_before_after, "after", checked: @search_params[:date_before_after] == "after", name: 'search[date_before_after]' %>
         <%= form.label :date_before_after_after, "After" %>
     </div>
+
+    <div>
+    <%= form.check_box :show_all, {name: 'search[show_all]'}, "1", "0" %>
+    <%= form.label :show_all, "Show All" %>
+    </div>
   
     <div>
       <%= form.submit "Search", class: "btn btn-primary" %>

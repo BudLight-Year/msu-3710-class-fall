@@ -6,25 +6,31 @@ class StudentsController < ApplicationController
   # GET /students or /students.json
   def index
     @search_params = params[:search] || {}
-    @students = Student.all
-  
-    if @search_params[:major].present?
-      @students = @students.where(major: @search_params[:major])
-    end
-    puts "Before date if block"
-    if @search_params[:date].present? && @search_params[:date_before_after].present?
-      date_str = @search_params[:date]
-      date = Date.parse(date_str)
-            date_before_after = @search_params[:date_before_after]
-      puts "Inside date search if block"
-      @students = case date_before_after
-                  when "before"
-                    @students = @students.where("graduation_date <= ?", date)
-                  when "after"
-                    @students = @students.where("graduation_date >= ?", date)
-                  else
-                    @students
-                  end
+    if @search_params[:major].blank? && @search_params[:date].blank? && @search_params[:show_all] == '0'
+    # if @search_params.values.all?(&:blank?) 
+      @students = Student.none
+    else
+      @students = Student.all
+      if @search_params[:show_all] == '0'
+        if @search_params[:major].present?
+          @students = @students.where(major: @search_params[:major])
+        end
+        puts "Before date if block"
+        if @search_params[:date].present? && @search_params[:date_before_after].present?
+          date_str = @search_params[:date]
+          date = Date.parse(date_str)
+                date_before_after = @search_params[:date_before_after]
+          puts "Inside date search if block"
+          @students = case date_before_after
+                      when "before"
+                        @students = @students.where("graduation_date <= ?", date)
+                      when "after"
+                        @students = @students.where("graduation_date >= ?", date)
+                      else
+                        @students
+                      end
+        end
+      end
     end
   
   end
