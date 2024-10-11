@@ -5,9 +5,10 @@ class StudentsController < ApplicationController
   before_action :set_student, only: %i[ show edit update destroy ]
   # GET /students or /students.json
   def index
+    @students = Student.none
     @search_params = params[:search] || {}
-    if @search_params[:major].blank? && @search_params[:date].blank? && @search_params[:show_all] == '0'
-    # if @search_params.values.all?(&:blank?) 
+  
+    if (@search_params[:major].blank? && @search_params[:date].blank? && @search_params[:show_all] == '0') || @search_params.values.all?(&:blank?)
       @students = Student.none
     else
       @students = Student.all
@@ -15,26 +16,23 @@ class StudentsController < ApplicationController
         if @search_params[:major].present?
           @students = @students.where(major: @search_params[:major])
         end
-        puts "Before date if block"
         if @search_params[:date].present? && @search_params[:date_before_after].present?
           date_str = @search_params[:date]
           date = Date.parse(date_str)
-                date_before_after = @search_params[:date_before_after]
-          puts "Inside date search if block"
+          date_before_after = @search_params[:date_before_after]
           @students = case date_before_after
-                      when "before"
-                        @students = @students.where("graduation_date <= ?", date)
-                      when "after"
-                        @students = @students.where("graduation_date >= ?", date)
+                      when 'before'
+                        @students.where('graduation_date <= ?', date)
+                      when 'after'
+                        @students.where('graduation_date >= ?', date)
                       else
                         @students
                       end
         end
       end
     end
-  
   end
-
+  
   # GET /students/1 or /students/1.json
   def show
   end
@@ -96,4 +94,5 @@ class StudentsController < ApplicationController
     def student_params
       params.require(:student).permit(:first_name, :last_name, :school_email, :major, :minor, :graduation_date, :profile_picture)
     end
+  
 end

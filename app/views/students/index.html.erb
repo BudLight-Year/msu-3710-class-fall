@@ -1,24 +1,31 @@
 <h1>Students</h1>
 
 <%= render 'search_form', search_params: @search_params %>
-<div id="students">
-  <% @students.each do |student| %>
-    <p>
-      <strong>First Name:</strong>
-      <%= student.first_name %><br>
-
-      <strong>Last Name:</strong>
-      <%= student.last_name %><br>
-
-      <strong>Major:</strong>
-      <%= student.major %><br>
-
-      <strong>Graduation Date:</strong>
-      <%= student.graduation_date %><br>
-
-      <%= link_to "Show this student", student %>
-    </p>
-  <% end %>
+<div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Major</th>
+        <th scope="col">Graduation Date</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @students.each do |student| %>
+        <tr>
+          <td><%= student.first_name %></td>
+          <td><%= student.last_name %></td>
+          <td><%= student.major %></td>
+          <td><%= student.graduation_date %></td>
+          <td>
+            <%= link_to "Show", student_path(student), class: "btn btn-primary" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
-<%= link_to "New student", 
+<%= link_to "New student", new_student_path, class: "btn btn-success" %>
