@@ -9,22 +9,24 @@
         <%= form.date_field :date, name: "search[date]" %>
     </div>
 
-    <div>
-        <%= form.label :date_before_after, "Search before or after date?", class: "form-label" %>
-        <%= form.radio_button :date_before_after, "before", checked: @search_params[:date_before_after] == "before", name: 'search[date_before_after]' %>
-        <%= form.label :date_before_after_before, "Before" %>
+    <fieldset>
+        
+        
+        <div>
+            <%= form.label :date_before_after, "Search before or after date?", class: "form-label" %>
+            <%= form.radio_button :date_before_after, "before", checked: @search_params[:date_before_after] == "before", id: 'search_date_before' %>
+            <%= form.label :search_date_before, "Before" %>
+            <%= form.radio_button :date_before_after, "after", checked: @search_params[:date_before_after] == "after", id: 'search_date_after' %>
+            <%= form.label :search_date_after, "After" %>
+        </div>
+    </fieldset>
 
-        <%= form.radio_button :date_before_after, "after", checked: @search_params[:date_before_after] == "after", name: 'search[date_before_after]' %>
-        <%= form.label :date_before_after_after, "After" %>
-    </div>
-
     <div>
-    <%= form.check_box :show_all, {name: 'search[show_all]'}, "1", "0" %>
-    <%= form.label :show_all, "Show All" %>
+        <%= form.check_box :show_all, {name: 'search[show_all]'}, "1", "0" %>
+        <%= form.label :show_all, "Show All" %>
     </div>
   
     <div>
       <%= form.submit "Search", class: "btn btn-primary" %>
     </div>
 <% end %>
-  

@@ -22,8 +22,9 @@
 
   <p>
     <strong>Minor:</strong>
-    <%= student.minor %>
+    <%= student.minor.present? ? student.minor : "None" %>
   </p>
+
 
   <p>
     <strong>Graduation date:</strong>
@@ -33,6 +34,3 @@
 
 </div>
 
-<div>
-  <button type="button" class="btn btn-primary">Link</button>
-</div>
