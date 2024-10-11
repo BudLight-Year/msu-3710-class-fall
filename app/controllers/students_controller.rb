@@ -5,17 +5,24 @@ class StudentsController < ApplicationController
   before_action :set_student, only: %i[ show edit update destroy ]
   # GET /students or /students.json
   def index
-    @students = Student.none
     @search_params = params[:search] || {}
   
-    if (@search_params[:major].blank? && @search_params[:date].blank? && @search_params[:show_all] == '0') || @search_params.values.all?(&:blank?)
-      @students = Student.none
-    else
+    # Show all students if the "Show All" button was clicked
+    if params[:show_all] == 'Show All'
       @students = Student.all
-      if @search_params[:show_all] == '0'
+    else
+      # Only return no students if both major and date are empty
+      if @search_params[:major].blank? && @search_params[:date].blank?
+        @students = Student.none
+      else
+        @students = Student.all
+  
+        # Filter by major if present
         if @search_params[:major].present?
           @students = @students.where(major: @search_params[:major])
         end
+  
+        # Filter by date and whether it's before/after if present
         if @search_params[:date].present? && @search_params[:date_before_after].present?
           date_str = @search_params[:date]
           date = Date.parse(date_str)
@@ -32,6 +39,7 @@ class StudentsController < ApplicationController
       end
     end
   end
+  
   
   # GET /students/1 or /students/1.json
   def show
