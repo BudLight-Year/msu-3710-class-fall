@@ -60,6 +60,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
+        flash[:notice] = "Student #{@student.first_name} #{@student.last_name} was successfully created."
         format.html { redirect_to student_url(@student), notice: "Student was successfully created." }
         format.json { render :show, status: :created, location: @student }
       else
