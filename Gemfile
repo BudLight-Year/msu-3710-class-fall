@@ -26,6 +26,11 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# BootStrap gem
+gem 'bootstrap', '~> 5.3.3'
+gem 'sassc-rails'
+
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
@@ -47,6 +52,12 @@ gem "image_processing", "~> 1.2"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
+
+  # rspec for tests
+  gem 'rspec-rails', '~> 6.0'
+
+  # faker for auto adding students
+  gem 'faker'
 end
 
 group :development do
@@ -65,3 +76,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+

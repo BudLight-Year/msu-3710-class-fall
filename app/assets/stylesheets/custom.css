@@ -1,0 +1,41 @@
+/* General focus outline override */
+a:focus, button:focus, input:focus, select:focus, textarea:focus {
+  outline: 3px solid #ff4500;  
+  outline-offset: 2px;         
+}
+
+.btn:focus {
+  outline: 3px solid #ff4500;
+  outline-offset: 2px;
+}
+
+.form-control:focus {
+  outline: 3px solid #ff4500;
+  outline-offset: 2px;
+  box-shadow: none;  
+}
+/* Custom focus styles for navbar links */
+.navbar-nav .nav-link:focus, 
+.navbar-toggler:focus {
+    outline: 3px solid #ff4500;  
+    outline-offset: 2px;         
+}
+
+/* Additional styles for dropdowns */
+.navbar-nav .dropdown-item:focus {
+    outline: 3px solid #ff4500;  
+    outline-offset: 2px;
+}
+/* Custom focus styles for input fields, including date pickers */
+input:focus, 
+input[type="date"]:focus {
+    outline: 3px solid #ff4500;  
+    outline-offset: 2px;         
+    box-shadow: none;         
+}
+
+/* If the date picker has specific classes, target them */
+.datepicker:focus {
+    outline: 3px solid #ff4500; 
+    outline-offset: 2px;        
+}

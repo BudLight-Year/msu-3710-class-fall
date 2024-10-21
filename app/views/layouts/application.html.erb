@@ -1,16 +1,70 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Name</title>
+    <title>Your App</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.0/sandstone/bootstrap.min.css">
+    <%= stylesheet_link_tag "custom", "data-turbo-track": "reload" %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
     <%= javascript_importmap_tags %>
   </head>
 
+
+
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark" role="banner">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Student Portfolio</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02" role="navigation">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="<%= root_path %>">Home
+                <span class="visually-hidden">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ url_for('account') }}">Sign In</a>
+                <a class="dropdown-item" href="{{ url_for('signout') }}">Sign Out</a> 
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Separated link</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <% if flash[:notice] %>
+      <% flash.each do |key, message| %>
+        <div class="alert alert-<%= key %> alert-dismissible fade show" role="alert">
+          <%= flash[:notice] %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+    <% end %>
+
+
+    <main role="main">
+      <%= yield %>
+    </main>
   </body>
+
 </html>
+
+
+

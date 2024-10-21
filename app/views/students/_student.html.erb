@@ -8,11 +8,12 @@
     <strong>Last name:</strong>
     <%= student.last_name %>
   </p>
-
+  <!-- 
   <p>
     <strong>School email:</strong>
     <%= student.school_email %>
   </p>
+  -->
 
   <p>
     <strong>Major:</strong>
@@ -21,12 +22,15 @@
 
   <p>
     <strong>Minor:</strong>
-    <%= student.minor %>
+    <%= student.minor.present? ? student.minor : "None" %>
   </p>
+
 
   <p>
     <strong>Graduation date:</strong>
     <%= student.graduation_date %>
   </p>
 
+
 </div>
+
