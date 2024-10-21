@@ -19,7 +19,7 @@ class StudentsTest < ApplicationSystemTestCase
     fill_in "Last name", with: @student.last_name
     fill_in "Major", with: @student.major
     fill_in "Minor", with: @student.minor
-    fill_in "School email", with: @student.school_email
+    fill_in "School email", with: @student.email
     click_on "Create Student"
 
     assert_text "Student was successfully created"
@@ -35,7 +35,7 @@ class StudentsTest < ApplicationSystemTestCase
     fill_in "Last name", with: @student.last_name
     fill_in "Major", with: @student.major
     fill_in "Minor", with: @student.minor
-    fill_in "School email", with: @student.school_email
+    fill_in "School email", with: @student.email
     click_on "Update Student"
 
     assert_text "Student was successfully updated"

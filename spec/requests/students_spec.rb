@@ -6,7 +6,7 @@ RSpec.describe "Students", type: :request do
   # GET /students (index)
   describe "GET /students" do
     context "when students exist" do
-      let!(:student) { Student.create!(first_name: "Aaron", last_name: "Gordon", school_email: "gordon@msudenver.edu", major: "Computer Science BS", graduation_date: "2025-05-15") }
+      let!(:student) { Student.create!(first_name: "Aaron", last_name: "Gordon", email: "gordon@msudenver.edu", major: "Computer Science BS", graduation_date: "2025-05-15") }
 
       # Test 1: Returns a successful response and displays the search form
       it "returns a successful response and displays the search form" do
@@ -33,8 +33,8 @@ RSpec.describe "Students", type: :request do
 
   # Search Functionality
   describe "GET /students (search functionality)" do
-    let!(:student1) { Student.create!(first_name: "Aaron", last_name: "Gordon", school_email: "gordon@msudenver.edu", major: "Computer Science BS", graduation_date: "2025-05-15") }
-    let!(:student2) { Student.create!(first_name: "Jackie", last_name: "Joyner", school_email: "joyner@msudenver.edu", major: "Data Science and Machine Learning Major", graduation_date: "2026-05-15") }
+    let!(:student1) { Student.create!(first_name: "Aaron", last_name: "Gordon", email: "gordon@msudenver.edu", major: "Computer Science BS", graduation_date: "2025-05-15") }
+    let!(:student2) { Student.create!(first_name: "Jackie", last_name: "Joyner", email: "joyner@msudenver.edu", major: "Data Science and Machine Learning Major", graduation_date: "2026-05-15") }
   
     # Test 4: Search by major
     it "returns students matching the major" do
@@ -65,7 +65,7 @@ RSpec.describe "Students", type: :request do
       # Test 7: Create a new student and ensure it redirects
       it "creates a new student and redirects" do
         expect {
-          post students_path, params: { student: { first_name: "Aaron", last_name: "Gordon", school_email: "gordon@msudenver.edu", major: "Computer Science BS", graduation_date: "2025-05-15" } }
+          post students_path, params: { student: { first_name: "Aaron", last_name: "Gordon", email: "gordon@msudenver.edu", major: "Computer Science BS", graduation_date: "2025-05-15" } }
         }.to change(Student, :count).by(1)
 
         expect(response).to have_http_status(:found)  # Expect redirect after creation
@@ -77,7 +77,7 @@ RSpec.describe "Students", type: :request do
       # Ensure that it returns a 201 status or check for creation success
       it "creates a new student and returns a 201 status" do
         expect {
-          post students_path, params: { student: { first_name: "Aaron", last_name: "Gordon", school_email: "gordon@msudenver.edu", major: "Computer Science BS", graduation_date: "2025-05-15" } }
+          post students_path, params: { student: { first_name: "Aaron", last_name: "Gordon", email: "gordon@msudenver.edu", major: "Computer Science BS", graduation_date: "2025-05-15" } }
         }.to change(Student, :count).by(1)
         expect(response).to have_http_status(:found)  # Expect redirect after creation
         follow_redirect!
@@ -89,7 +89,7 @@ RSpec.describe "Students", type: :request do
       # Test 9 (Student will complete this part)
       # Ensure it does not create a student and returns a 422 status
       it "does not create a new student and returns a 422 status" do
-        post students_path, params: { student: { first_name: "", last_name: "", school_email: "", major: "", graduation_date: "" } }
+        post students_path, params: { student: { first_name: "", last_name: "", email: "", major: "", graduation_date: "" } }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -98,7 +98,7 @@ RSpec.describe "Students", type: :request do
   # GET /students/:id (show)
   describe "GET /students/:id" do
     context "when the student exists" do
-      let!(:student) { Student.create!(first_name: "Aaron", last_name: "Gordon", school_email: "gordon@msudenver.edu", major: "Computer Science BS", graduation_date: "2025-05-15") }
+      let!(:student) { Student.create!(first_name: "Aaron", last_name: "Gordon", email: "gordon@msudenver.edu", major: "Computer Science BS", graduation_date: "2025-05-15") }
 
       # Test 10 (Student will complete this part)
       # Ensure it returns a successful response (200 OK)
@@ -113,7 +113,7 @@ RSpec.describe "Students", type: :request do
         get student_path(student)
         expect(response.body).to include(student.first_name)
         expect(response.body).to include(student.last_name)
-        expect(response.body).to include(student.school_email)
+        expect(response.body).to include(student.email)
         expect(response.body).to include(student.major)
         expect(response.body).to include(student.graduation_date.to_s)
       end
@@ -132,7 +132,7 @@ RSpec.describe "Students", type: :request do
 
   # DELETE /students/:id (destroy)
   describe "DELETE /students/:id" do
-    let!(:student) { Student.create!(first_name: "Aaron", last_name: "Gordon", school_email: "gordon@msudenver.edu", major: "Computer Science BS", graduation_date: "2025-05-15") }
+    let!(:student) { Student.create!(first_name: "Aaron", last_name: "Gordon", email: "gordon@msudenver.edu", major: "Computer Science BS", graduation_date: "2025-05-15") }
 
     # Test 13: Deletes the student and redirects
     it "deletes the student and redirects" do
